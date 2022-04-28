@@ -1,17 +1,21 @@
 import React from "react";
 
+export type Type = "email" | "password";
 export interface TextInputProps {
   className?: string;
   value: string;
   onChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   children?: React.ReactNode;
+  type?: Type;
 }
 const TextInput: React.FC<TextInputProps> = ({
   className,
+  children,
   value,
   onChange,
   placeholder,
+  type = "email",
 }) => {
   const handleChange = (
     value: string,
@@ -20,12 +24,20 @@ const TextInput: React.FC<TextInputProps> = ({
     onChange(value, event);
   };
   return (
-    <input
-      className={className}
-      placeholder={placeholder}
-      value={value}
-      onChange={(event) => handleChange(event.target.value, event)}
-    />
+    <div className="w-full">
+      <div className="mt-1 relative rounded-md shadow-sm">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ml-4">
+          {children}
+        </div>
+        <input
+          className={className}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={(event) => handleChange(event.target.value, event)}
+        />
+      </div>
+    </div>
   );
 };
 
