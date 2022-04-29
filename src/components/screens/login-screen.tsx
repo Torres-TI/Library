@@ -18,8 +18,8 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   return (
-    <WebPage className=" relative flex flex-col flex-1 items-center justify-center min-w-screen min-h-screen">
-      <Card className="  flex flex-col items-center px-md md:px-xl lg:px-16 pt-10 pb-8 w-full max-w-[35rem]">
+    <WebPage className="relative flex flex-col flex-1 items-center justify-center min-w-screen min-h-screen">
+      <Card className="flex flex-col items-center px-4 md:px-8 lg:px-16 pt-10 pb-8 w-full max-w-[35rem]">
         <LibraryLogo className="w-48 h-48 -mt-32  absolute" />
         <div className=" flex flex-col w-full space-y-4 mb-4">
           <Button
@@ -48,8 +48,8 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
             value={email}
             onChange={setEmail}
             className={classNameBuilder(`w-full border border-gray-200 
-          min-h-[4rem] rounded-2xl flex items-center px-6  text-center 
-         placeholder-gray-400  focus:outline-none focus:border-gray-500 focus:placeholder-transparent`)}
+            min-h-[4rem] rounded-2xl flex items-center px-6  text-center 
+          placeholder-gray-400  focus:outline-none focus:border-gray-500 focus:placeholder-transparent`)}
             placeholder="Digite seu E-mail"
           >
             <EmailIcon className="w-7 h-7" />
