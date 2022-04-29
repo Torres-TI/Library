@@ -5,7 +5,7 @@ export interface HomeScreenProps {}
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   return (
     <WebPage>
-      <h1>Home</h1>
+      <h1>Hello World</h1>
     </WebPage>
   );
 };
