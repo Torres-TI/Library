@@ -5,14 +5,16 @@ export interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   type?: ButtonTypeType;
+  onClick?: () => void;
 }
 const Button: React.FC<ButtonProps> = ({
   children,
   className,
+  onClick,
   type = "button",
 }) => {
   return (
-    <button className={className} type={type}>
+    <button className={className} type={type} onClick={onClick}>
       {children}
     </button>
   );
