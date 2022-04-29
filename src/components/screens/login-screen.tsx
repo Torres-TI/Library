@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import EmailIcon from "../../assets/svg/email-icon.svg";
 import FacebookIcon from "../../assets/svg/facebook-icon.svg";
@@ -13,6 +14,7 @@ import WebPage from "../atoms/webpage";
 
 export interface LoginScreenProps {}
 const LoginScreen: React.FC<LoginScreenProps> = () => {
+  const router = useRouter();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   return (
@@ -70,8 +72,9 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
           </text>
         </Button>
         <Button
-          type="submit"
+          type="button"
           className=" w-full bg-blue-800  shadow-sm border hover:bg-blue-700  hover:border-blue-600 min-h-[4rem] rounded-2xl flex items-center px-6  mt-4"
+          onClick={() => router.push("/home")}
         >
           <text className="flex flex-1 justify-center font-medium text-lg text-white uppercase">
             Login
