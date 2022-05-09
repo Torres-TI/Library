@@ -21,15 +21,27 @@ const SideMenu: React.FC<SideMenuProps> = () => {
       >
         <LibraryLogo className="w-32 h-32" />
       </div>
-      <div className="h-full space-y-6 py-20 absolute mt-24">
-        <MenuItem href="/home" label="Início">
+      <div className="h-full space-y-6 py-20 absolute mt-24 group">
+        <MenuItem
+          href="/home"
+          label="Início"
+          className="group-hover:text-indigo-600"
+        >
           <HomeIcon className="w-8 h-8" />
         </MenuItem>
-        <MenuItem href="/estante" label="Estante">
+        <MenuItem
+          href="/estante"
+          label="Estante"
+          className="group-hover:text-indigo-600"
+        >
           <BookOpenIcon className="w-8 h-8 " />
         </MenuItem>
-        <MenuItem href="/adicionar" label="Adicionar">
-          <PlusSmIcon className={`w-8 h-8 rounded-lg  border-2`} />
+        <MenuItem
+          href="/adicionar"
+          label="Adicionar"
+          className="group-hover:text-indigo-600"
+        >
+          <PlusSmIcon className={`w-8 h-8 rounded-lg  border-2 `} />
         </MenuItem>
       </div>
     </div>
@@ -42,6 +54,7 @@ export interface MenuItemProps {
   children?: React.ReactNode;
   href: string;
   label?: string;
+  className?: string;
 }
 const MenuItem: React.FC<MenuItemProps> = (props) => {
   const { href, label, children } = props;
@@ -51,7 +64,9 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
   return (
     <Link href={href} passHref>
       <div
-        className={`relative flex flex-row  items-center justify-between py-xs space-x-10 cursor-pointer`}
+        className={classNameBuilder(
+          "relative flex flex-row  items-center justify-between py-xs space-x-10 cursor-pointer"
+        )}
       >
         <div
           className={` ${
