@@ -9,9 +9,9 @@ export interface BookGridProps {
 const BookGrid: React.FC<BookGridProps> = ({ books, openBookDetail }) => {
   return (
     <div className="  grid gap-x-2 gap-y-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
-      {books.map((book) => {
+      {books?.map((book) => {
         return (
-          <LibraryCard key={book.id} book={book} onClick={openBookDetail} />
+          <LibraryCard key={book.title} book={book} onClick={openBookDetail} />
         );
       })}
     </div>
