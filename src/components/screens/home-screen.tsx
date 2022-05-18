@@ -1,14 +1,25 @@
 import React from "react";
+import useGetBookById from "../../api-hooks/use-get-book-by-id";
 import useGetBooks from "../../api-hooks/use-get-books";
-import Modal from "../atoms/modal";
+import { BookType } from "../../types/book-type";
 import WebPage from "../atoms/webpage";
 import SideMenu from "../molecules/side-menu";
+import BookDetailModal from "../organisms/book-detail-modal";
 import BookGrid from "../organisms/book-grid";
 
-export interface HomeScreenProps {}
-const HomeScreen: React.FC<HomeScreenProps> = () => {
+export interface HomeScreenProps {
+  book: BookType;
+}
+const HomeScreen: React.FC<HomeScreenProps> = ({ book }) => {
   const [showBookDetailModal, setShowBookDetailModal] = React.useState(false);
-  const { data: books } = useGetBooks();
+  const [bookId, setBookId] = React.useState("");
+  const { data: getBooks } = useGetBooks();
+
+  const { data } = useGetBookById({
+    bookId: bookId,
+  });
+  const bookDetail = data || [];
+
   return (
     <WebPage className="w-full h-full flex ">
       <div className="w-full max-w-[15rem]">
@@ -24,18 +35,18 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           </p>
         </div>
         <BookGrid
-          books={books!}
-          openBookDetail={() => setShowBookDetailModal(true)}
+          books={getBooks!}
+          onBookClick={(bookId) => {
+            setBookId(bookId);
+            setShowBookDetailModal(true);
+          }}
         />
       </div>
-      <Modal
+      <BookDetailModal
         isOpen={showBookDetailModal}
         closeModal={() => setShowBookDetailModal(false)}
-      >
-        <div className="w-full h-full flex flex-col justify-center items-center">
-          Hello World
-        </div>
-      </Modal>
+        booksDetail={bookDetail}
+      />
     </WebPage>
   );
 };
