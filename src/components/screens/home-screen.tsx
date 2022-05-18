@@ -1,5 +1,5 @@
 import React from "react";
-import { BookType } from "../../types/book-type";
+import useGetBooks from "../../api-hooks/use-get-books";
 import Modal from "../atoms/modal";
 import WebPage from "../atoms/webpage";
 import SideMenu from "../molecules/side-menu";
@@ -8,7 +8,7 @@ import BookGrid from "../organisms/book-grid";
 export interface HomeScreenProps {}
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const [showBookDetailModal, setShowBookDetailModal] = React.useState(false);
-
+  const { data: books } = useGetBooks();
   return (
     <WebPage className="w-full h-full flex ">
       <div className="w-full max-w-[15rem]">
@@ -24,7 +24,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           </p>
         </div>
         <BookGrid
-          books={booksList}
+          books={books!}
           openBookDetail={() => setShowBookDetailModal(true)}
         />
       </div>
@@ -41,54 +41,3 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 };
 
 export default HomeScreen;
-
-const booksList = [
-  {
-    id: "harry_potter",
-    title: "Harry Potter e a Pedra Filosofal",
-    description: "A história de Harry Potter e a Pedra Filosofal",
-    coverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/41897yAI4LL._SX346_BO1,204,203,200_.jpg",
-    coverAlt: "Harry Potter e a Pedra Filosofal",
-  },
-  {
-    id: "harry_pot",
-    title: "Harry Potter e a Pedra Filosofal",
-    description: "A história de Harry Potter e a Pedra Filosofal",
-    coverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/41897yAI4LL._SX346_BO1,204,203,200_.jpg",
-    coverAlt: "Harry Potter e a Pedra Filosofal",
-  },
-  {
-    id: "harry_po",
-    title: "Harry Potter e a Pedra Filosofal",
-    description: "A história de Harry Potter e a Pedra Filosofal",
-    coverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/41897yAI4LL._SX346_BO1,204,203,200_.jpg",
-    coverAlt: "Harry Potter e a Pedra Filosofal",
-  },
-  {
-    id: "harry_p",
-    title: "Harry Potter e a Pedra Filosofal",
-    description: "A história de Harry Potter e a Pedra Filosofal",
-    coverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/41897yAI4LL._SX346_BO1,204,203,200_.jpg",
-    coverAlt: "Harry Potter e a Pedra Filosofal",
-  },
-  {
-    id: "harry_",
-    title: "Harry Potter e a Pedra Filosofal",
-    description: "A história de Harry Potter e a Pedra Filosofal",
-    coverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/41897yAI4LL._SX346_BO1,204,203,200_.jpg",
-    coverAlt: "Harry Potter e a Pedra Filosofal",
-  },
-  {
-    id: "harry",
-    title: "Harry Potter e a Pedra Filosofal",
-    description: "A história de Harry Potter e a Pedra Filosofal",
-    coverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/41897yAI4LL._SX346_BO1,204,203,200_.jpg",
-    coverAlt: "Harry Potter e a Pedra Filosofal",
-  },
-] as BookType[];
