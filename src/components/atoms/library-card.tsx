@@ -1,27 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
+import { BookType } from "../../types/book-type";
 
 export interface LibraryCardProps {
-  title: string;
-  description: string;
-  src: string;
-  alt: string;
+  onClick?: () => void;
+  book: BookType;
 }
-const LibraryCard: React.FC<LibraryCardProps> = ({
-  title,
-  description,
-  src,
-  alt,
-}) => {
+const LibraryCard: React.FC<LibraryCardProps> = ({ onClick, book }) => {
   return (
-    <div className="w-72 min-h-[320px] bg-white shadow-lg flex flex-col  border border-gray-100 rounded-lg ">
+    <div
+      className="w-72 min-h-[380px] bg-white shadow-lg flex flex-col  border border-gray-100 rounded-lg cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
+      onClick={onClick}
+    >
       <div className="w-full h-[160px] ">
-        <img src={src} alt={alt} className="w-full h-full rounded-t-lg" />
+        <img
+          src={book.coverUrl}
+          alt={book.coverAlt}
+          className="w-full h-full rounded-t-lg"
+        />
       </div>
       <div className="flex flex-col space-y-4 w-full mt-4 px-4">
-        <div className="text-lg font-bold text-center">{title}</div>
+        <div className="text-lg font-bold text-center">{book.title}</div>
         <text className="text-sm font-normal whitespace-pre-line">
-          {description}
+          {book.description}
         </text>
       </div>
     </div>
