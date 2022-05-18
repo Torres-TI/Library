@@ -1,9 +1,9 @@
 import React from "react";
 
-export type Type = "email" | "password";
+export type Type = "email" | "password" | "text" | "number";
 export interface TextInputProps {
   className?: string;
-  value: string;
+  value?: string;
   onChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   children?: React.ReactNode;
