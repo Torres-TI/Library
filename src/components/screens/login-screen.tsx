@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React from "react";
 import EmailIcon from "../../assets/svg/email-icon.svg";
 import FacebookIcon from "../../assets/svg/facebook-icon.svg";
@@ -6,6 +5,7 @@ import GoogleIcon from "../../assets/svg/google-icon.svg";
 import LibraryLogo from "../../assets/svg/library-logo.svg";
 import PasswordIcon from "../../assets/svg/password-icon.svg";
 import { classNameBuilder } from "../../helpers/class-name-builder";
+import { useAuth } from "../../hooks/use-auth";
 import Button from "../atoms/button";
 import Card from "../atoms/card";
 import Divider from "../atoms/divider";
@@ -14,9 +14,9 @@ import WebPage from "../atoms/webpage";
 
 export interface LoginScreenProps {}
 const LoginScreen: React.FC<LoginScreenProps> = () => {
-  const router = useRouter();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const { signIn } = useAuth();
   return (
     <WebPage className="relative flex flex-col flex-1 items-center justify-center min-w-screen min-h-screen">
       <Card className="flex flex-col items-center px-4 md:px-8 lg:px-16 pt-10 pb-8 w-full max-w-[35rem]">
@@ -74,7 +74,9 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
         <Button
           type="button"
           className=" w-full bg-blue-800  shadow-sm border hover:bg-blue-700  hover:border-blue-600 min-h-[4rem] rounded-2xl flex items-center px-6  mt-4"
-          onClick={() => router.push("/home")}
+          onClick={() => {
+            signIn(email, password);
+          }}
         >
           <text className="flex flex-1 justify-center font-medium text-lg text-white uppercase">
             Login
