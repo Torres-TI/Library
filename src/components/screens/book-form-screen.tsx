@@ -50,21 +50,24 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
             <Form onSubmit={submit}>
               <TextInput
                 type="text"
+                rows={1}
                 value={getValue("title")}
                 onChange={(value) => setValue("title", value)}
                 placeholder="Digite o título do livro"
-                className="w-full bg-transparent  border-2 border-zinc-400 focus:border-indigo-700  rounded-2xl text-indigo-900 placeholder:text-center hover:border-indigo-700 "
+                className="w-full bg-transparent  border-2 border-zinc-400 focus:border-indigo-700  rounded-2xl text-indigo-900  hover:border-indigo-700 "
               />
               <TextInput
                 type="text"
+                rows={5}
                 value={getValue("description")}
                 onChange={(value) => setValue("description", value)}
                 placeholder="Digite a descrição do livro"
-                className="w-full min-h-[100px] bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 rounded-2xl text-indigo-900 placeholder:text-center mt-6 "
+                className="w-full min-h-[100px] bg-transparent resize-none  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 rounded-2xl text-indigo-900    scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin"
               />
-              <div className="flex w-full justify-between space-x-6 mt-6">
+              <div className="flex w-full justify-between space-x-6 ">
                 <TextInput
                   type="text"
+                  rows={2}
                   value={getValue("author")}
                   onChange={(value) => setValue("author", value)}
                   placeholder="Autor"
@@ -82,10 +85,10 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                   value={getValue("cdu")}
                   onChange={(value) => setValue("cdu", value)}
                   placeholder="CDD"
-                  className="w-full min-h-[60px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 text-indigo-900 placeholder:text-center"
+                  className="w-full min-h-[40px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 text-indigo-900 placeholder:text-center"
                 />
               </div>
-              <div className="flex w-full justify-between space-x-6 mt-6">
+              <div className="flex w-full justify-between space-x-6 ">
                 <TextInput
                   type="text"
                   value={getValue("edition")}
@@ -108,7 +111,7 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                   className="w-full min-h-[60px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700  hover:border-indigo-700 text-indigo-900 placeholder:text-center"
                 />
               </div>
-              <div className="flex flex-1 justify-end mt-10">
+              <div className="flex flex-1 justify-end mt-6">
                 <Button
                   type="submit"
                   className="w-[170px] h-[50px] bg-indigo-700 rounded-2xl text-sm text-white flex items-center justify-center"
