@@ -54,7 +54,7 @@ const BookDetailModal: React.FC<BookDetailModalProps> = ({
                   {book.title}
                 </h1>
                 <p className="px-8 pt-8 ">
-                  <span className="text-left whitespace-pre-line font-normal text-base">
+                  <span className="text-left whitespace-pre-line font-normal text-base line-clamp-[15]">
                     {book.description}
                   </span>
                 </p>
