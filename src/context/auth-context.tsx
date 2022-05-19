@@ -1,4 +1,10 @@
-import { getAuth, signInWithEmailAndPassword, User } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  User,
+} from "firebase/auth";
 import { useRouter } from "next/router";
 import React, { createContext } from "react";
 import { app } from "../../firebase";
@@ -10,6 +16,7 @@ interface AuthContextProps {
 const AuthContext = createContext({
   signIn: (email: string, password: string) => {},
   signOut: () => {},
+  loginWithGoogle: () => {},
 });
 
 export const AuthProvider = ({ children }: AuthContextProps) => {
@@ -26,7 +33,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log({ errorCode, errorMessage });
+        return { errorCode, errorMessage };
       });
   };
   const signOut = () => {
@@ -35,8 +42,26 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       router.push("/");
     });
   };
+  const provider = new GoogleAuthProvider();
+  const loginWithGoogle = async () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const user = result.user;
+        setUser(user);
+        router.push("/home");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log({ errorCode, errorMessage, email, credential });
+      });
+  };
   return (
-    <AuthContext.Provider value={{ signIn, signOut }}>
+    <AuthContext.Provider value={{ signIn, signOut, loginWithGoogle }}>
       {children}
     </AuthContext.Provider>
   );
