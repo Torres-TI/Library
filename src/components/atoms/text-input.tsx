@@ -4,10 +4,14 @@ export type Type = "email" | "password" | "text" | "number";
 export interface TextInputProps {
   className?: string;
   value?: string;
-  onChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    value: string,
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
   placeholder?: string;
   children?: React.ReactNode;
   type?: Type;
+  rows?: number;
 }
 const TextInput: React.FC<TextInputProps> = ({
   className,
@@ -15,11 +19,11 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   onChange,
   placeholder,
-  type = "email",
+  rows,
 }) => {
   const handleChange = (
     value: string,
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     onChange(value, event);
   };
@@ -29,9 +33,9 @@ const TextInput: React.FC<TextInputProps> = ({
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ml-4">
           {children}
         </div>
-        <input
+        <textarea
+          rows={rows}
           className={className}
-          type={type}
           placeholder={placeholder}
           value={value}
           onChange={(event) => handleChange(event.target.value, event)}
