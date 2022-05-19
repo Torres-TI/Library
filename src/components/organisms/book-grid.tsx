@@ -14,7 +14,7 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onBookClick }) => {
           <LibraryCard
             key={book.id}
             book={book}
-            onClick={() => onBookClick?.(book.id)}
+            onClick={() => onBookClick(book.id!)}
           />
         );
       })}
