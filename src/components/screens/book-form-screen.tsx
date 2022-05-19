@@ -60,7 +60,7 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                 value={getValue("description")}
                 onChange={(value) => setValue("description", value)}
                 placeholder="Digite a descrição do livro"
-                className="w-full min-h-[100px] bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 rounded-2xl text-indigo-900 placeholder:text-center mt-6"
+                className="w-full min-h-[100px] bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 rounded-2xl text-indigo-900 placeholder:text-center mt-6 "
               />
               <div className="flex w-full justify-between space-x-6 mt-6">
                 <TextInput
