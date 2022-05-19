@@ -6,7 +6,7 @@ import useForm from "../../hooks/use-form";
 import { BookType } from "../../types/book-type";
 import Button from "../atoms/button";
 import Form from "../atoms/form";
-import TextInput from "../atoms/text-input";
+import TextArea from "../atoms/text-area";
 import WebPage from "../atoms/webpage";
 import SideMenu from "../molecules/side-menu";
 
@@ -15,7 +15,7 @@ export interface BookFormScreenProps {
 }
 const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
   const router = useRouter();
-  const { fetch } = useCreateBook();
+  const { fetch, error } = useCreateBook();
   const { getValue, setValue, getError, submit } = useForm<BookType>({
     initialValues,
     onSubmit: (values: BookType) => {
@@ -23,9 +23,9 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
         ...values!,
         book: values,
       });
-      router.push("/home");
     },
   });
+
   return (
     <WebPage title="Adicionar Livro" className="w-full h-full flex ">
       <div className="w-full max-w-[15rem]">
@@ -48,7 +48,7 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
           </div>
           <div className="w-full px-10">
             <Form onSubmit={submit}>
-              <TextInput
+              <TextArea
                 type="text"
                 rows={1}
                 value={getValue("title")}
@@ -56,7 +56,7 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                 placeholder="Digite o título do livro"
                 className="w-full bg-transparent  border-2 border-zinc-400 focus:border-indigo-700  rounded-2xl text-indigo-900  hover:border-indigo-700 "
               />
-              <TextInput
+              <TextArea
                 type="text"
                 rows={5}
                 value={getValue("description")}
@@ -65,7 +65,7 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                 className="w-full min-h-[100px] bg-transparent resize-none  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 rounded-2xl text-indigo-900    scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin"
               />
               <div className="flex w-full justify-between space-x-6 ">
-                <TextInput
+                <TextArea
                   type="text"
                   rows={2}
                   value={getValue("author")}
@@ -73,14 +73,14 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                   placeholder="Autor"
                   className="w-full min-h-[60px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 text-indigo-900 placeholder:text-center"
                 />
-                <TextInput
+                <TextArea
                   type="text"
                   value={getValue("cdd")}
                   onChange={(value) => setValue("cdd", value)}
                   placeholder="CDU "
                   className="w-full min-h-[60px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 text-indigo-900 placeholder:text-center"
                 />
-                <TextInput
+                <TextArea
                   type="text"
                   value={getValue("cdu")}
                   onChange={(value) => setValue("cdu", value)}
@@ -89,21 +89,21 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                 />
               </div>
               <div className="flex w-full justify-between space-x-6 ">
-                <TextInput
+                <TextArea
                   type="text"
                   value={getValue("edition")}
                   onChange={(value) => setValue("edition", value)}
                   placeholder="Edição"
                   className="w-full min-h-[60px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 text-indigo-900 placeholder:text-center"
                 />
-                <TextInput
+                <TextArea
                   type="text"
                   value={getValue("coverUrl")}
                   onChange={(value) => setValue("coverUrl", value)}
                   placeholder="URL da capa"
                   className="w-full min-h-[60px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700 hover:border-indigo-700 text-indigo-900 placeholder:text-center"
                 />
-                <TextInput
+                <TextArea
                   type="text"
                   value={getValue("coverAlt")}
                   onChange={(value) => setValue("coverAlt", value)}
