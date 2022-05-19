@@ -11,6 +11,8 @@ const CreateBookService = async ({ book }: CreateBookServiceType) => {
     title: book.title,
     author: book.author,
     description: book.description,
+    coverUrl: book.coverUrl,
+    coverAlt: book.coverAlt,
   };
   try {
     const bookDoc = await addDoc(bookRef, bookData);
