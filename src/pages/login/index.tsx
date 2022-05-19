@@ -1,5 +1,5 @@
 import React from "react";
-import LoginScreen from "../../components/screens/login-screen";
+import LoginScreen from "../../components/screens/authentications/login-screen";
 
 export interface LoginRouteProps {}
 const LoginRoute: React.FC<LoginRouteProps> = () => {
