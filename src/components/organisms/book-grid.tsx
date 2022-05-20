@@ -8,7 +8,7 @@ export interface BookGridProps {
 }
 const BookGrid: React.FC<BookGridProps> = ({ books, onBookClick }) => {
   return (
-    <div className="  grid gap-x-2 gap-y-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
+    <div className="  grid grid-cols-1 md:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-4 gap-y-6  ">
       {books?.map((book) => {
         return (
           <LibraryCard
