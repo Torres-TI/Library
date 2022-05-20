@@ -2,7 +2,6 @@ import { BookOpenIcon, HomeIcon, PlusSmIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import LibraryLogo from "../../assets/svg/library-logo.svg";
 import { classNameBuilder } from "../../helpers/class-name-builder";
 export interface SideMenuProps {}
 const SideMenu: React.FC<SideMenuProps> = () => {
@@ -10,18 +9,11 @@ const SideMenu: React.FC<SideMenuProps> = () => {
   return (
     <div
       className={classNameBuilder(
-        "bg-white min-h-screen max-w-[15rem] flex flex-col items-center border-r border-gray-100"
+        "relative hidden sm:flex flex-col  bg-white min-h-screen  items-center border-r border-gray-100"
       )}
     >
-      <div
-        className="relative cursor-pointer"
-        onClick={() => {
-          router.push("/home");
-        }}
-      >
-        <LibraryLogo className="w-32 h-32" />
-      </div>
-      <div className="h-full space-y-6 py-20 absolute mt-24 group">
+      <h1 className="pt-10">Logo</h1>
+      <div className="h-full space-y-6 pt-10 group">
         <MenuItem
           href="/home"
           label="Início"
@@ -65,7 +57,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
     <Link href={href} passHref>
       <div
         className={classNameBuilder(
-          "relative flex flex-row  items-center justify-between py-xs space-x-10 cursor-pointer"
+          " flex flex-row w-full items-center justify-between space-x-6 px-4 cursor-pointer group"
         )}
       >
         <div
