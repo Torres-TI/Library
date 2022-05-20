@@ -9,10 +9,10 @@ export interface LibraryCardProps {
 const LibraryCard: React.FC<LibraryCardProps> = ({ onClick, book }) => {
   return (
     <div
-      className="w-72 min-h-[380px] max-h-[400px] bg-white shadow-lg flex flex-col  border border-gray-100 rounded-lg cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
+      className="w-full h-[424px] overflow-hidden bg-white shadow-lg flex flex-col  border border-gray-100 rounded-lg cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300"
       onClick={onClick}
     >
-      <div className="aspect-w-4 aspect-h-3">
+      <div className="aspect-w-4 aspect-h-3 md:aspect-w-7 md:aspect-h-5">
         <img
           src={book.coverUrl}
           alt={book.coverAlt}
