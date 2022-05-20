@@ -2,6 +2,7 @@ import React from "react";
 import useGetBookById from "../../api-hooks/use-get-book-by-id";
 import useGetBooks from "../../api-hooks/use-get-books";
 import { BookType } from "../../types/book-type";
+import WebPage from "../atoms/webpage";
 import BookDetailModal from "../organisms/book-detail-modal";
 import BookGrid from "../organisms/book-grid";
 import PrivateTemplate from "../template/private-template";
@@ -21,6 +22,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ book }) => {
 
   return (
     <PrivateTemplate title="Biblioteca">
+      <WebPage title="Home | Library" />
       <BookGrid
         books={getBooks!}
         onBookClick={(bookId) => {
