@@ -8,7 +8,7 @@ import Button from "../atoms/button";
 import Form from "../atoms/form";
 import TextArea from "../atoms/text-area";
 import WebPage from "../atoms/webpage";
-import SideMenu from "../molecules/side-menu";
+import PrivateTemplate from "../template/private-template";
 
 export interface BookFormScreenProps {
   initialValues?: BookType;
@@ -27,14 +27,10 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
   });
 
   return (
-    <WebPage title="Adicionar Livro" className="w-full h-full flex ">
-      <div className="w-full max-w-[15rem]">
-        <SideMenu />
-      </div>
+    <PrivateTemplate title="Novo Livro">
+      <WebPage title="Novo Livro | Library" />
+
       <div className="flex flex-col w-full px-8 ">
-        <h1 className="text-medium text-indigo-700 text-3xl pt-12">
-          Adicionar Livro
-        </h1>
         <div className="w-full h-full px-10 bg-zinc-200 rounded-3xl max-w-[1220px] max-h-[700px] mt-8 space-y-6">
           <div
             className="w-full border-dashed border-2  border-zinc-400 hover:border-collapse hover:border-indigo-600 max-h-[180px] h-full mt-10 flex flex-col items-center justify-center rounded-2xl cursor-pointer group "
@@ -111,7 +107,7 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
                   className="w-full min-h-[60px]  rounded-lg bg-transparent  border-2 border-zinc-400 focus:border-indigo-700  hover:border-indigo-700 text-indigo-900 placeholder:text-center"
                 />
               </div>
-              <div className="flex flex-1 justify-end mt-6">
+              <div className="flex flex-1 justify-end mt-6 mb-5">
                 <Button
                   type="submit"
                   className="w-[170px] h-[50px] bg-indigo-700 rounded-2xl text-sm text-white flex items-center justify-center"
@@ -123,7 +119,7 @@ const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
           </div>
         </div>
       </div>
-    </WebPage>
+    </PrivateTemplate>
   );
 };
 
