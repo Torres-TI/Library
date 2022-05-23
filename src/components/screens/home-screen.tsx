@@ -8,9 +8,9 @@ import BookGrid from "../organisms/book-grid";
 import PrivateTemplate from "../template/private-template";
 
 export interface HomeScreenProps {
-  book: BookType;
+  book?: BookType;
 }
-const HomeScreen: React.FC<HomeScreenProps> = ({ book }) => {
+const HomeScreen: React.FC<HomeScreenProps> = () => {
   const [showBookDetailModal, setShowBookDetailModal] = React.useState(false);
   const [bookId, setBookId] = React.useState("");
   const { data: getBooks } = useGetBooks();
@@ -23,6 +23,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ book }) => {
   return (
     <PrivateTemplate title="Biblioteca">
       <WebPage title="Home | Library" />
+
       <BookGrid
         books={getBooks!}
         onBookClick={(bookId) => {
