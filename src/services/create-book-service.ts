@@ -4,9 +4,10 @@ import { BookType } from "../types/book-type";
 
 type CreateBookServiceType = {
   book: BookType;
+  uid?: string;
 };
-const CreateBookService = async ({ book }: CreateBookServiceType) => {
-  const bookRef = await collection(db, "books");
+const CreateBookService = async ({ book, uid }: CreateBookServiceType) => {
+  const userRef = collection(db, `users/${uid}/books`);
   const bookData = {
     title: book.title,
     author: book.author,
@@ -15,9 +16,9 @@ const CreateBookService = async ({ book }: CreateBookServiceType) => {
     coverAlt: book.coverAlt,
   };
   try {
-    const bookDoc = await addDoc(bookRef, bookData);
-    const bookDetailsRef = await collection(db, "books", bookDoc.id, "details");
-    const addBook = await addDoc(bookDetailsRef, {
+    const doc = await addDoc(userRef, bookData);
+    const booksDetailRef = await collection(userRef, doc.id, "details");
+    const addBookDetail = await addDoc(booksDetailRef, {
       title: book.title,
       description: book.description,
       coverUrl: book.coverUrl,
@@ -27,9 +28,9 @@ const CreateBookService = async ({ book }: CreateBookServiceType) => {
       cdu: book.cdu,
       edition: book.edition,
     });
-    return addBook;
-  } catch (error) {
-    console.error(error);
+    return addBookDetail;
+  } catch {
+    console.log("error");
   }
 };
 

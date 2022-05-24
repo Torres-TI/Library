@@ -3,32 +3,36 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-  User,
 } from "firebase/auth";
 import { useRouter } from "next/router";
 import React, { createContext } from "react";
 import { app } from "../../firebase";
+import { UserType } from "../types/user-type";
 
 interface AuthContextProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  user?: UserType | null;
+  signInWithEmail: (email: string, password: string) => Promise<void> | null;
+  signOut?: () => Promise<void>;
+  loginWithGoogle?: () => Promise<void>;
 }
 
-const AuthContext = createContext({
-  signIn: (email: string, password: string) => {},
-  signOut: () => {},
-  loginWithGoogle: () => {},
+const AuthContext = createContext<AuthContextProps>({
+  user: null,
+  signInWithEmail: () => null,
 });
 
 export const AuthProvider = ({ children }: AuthContextProps) => {
-  const [user, setUser] = React.useState<User>();
+  const [user, setUser] = React.useState<UserType | null>(null);
   const router = useRouter();
   const auth = getAuth(app);
-  const signIn = async (email: string, password: string) => {
+  const signInWithEmail = async (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        const { displayName, email, uid, photoURL, providerId } =
+          userCredential.user;
+        setUser({ displayName, email, uid, photoURL, providerId });
         router.push("/home");
-        return user;
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -36,12 +40,12 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         return { errorCode, errorMessage };
       });
   };
-  const signOut = () => {
-    auth.signOut().then(() => {
-      setUser(undefined);
-      router.push("/");
-    });
-  };
+  // const signOut = () => {
+  //   auth.signOut().then(() => {
+  //     setUser(null);
+  //     router.push("/");
+  //   });
+  // };
   const provider = new GoogleAuthProvider();
   const loginWithGoogle = async () => {
     signInWithPopup(auth, provider)
@@ -61,7 +65,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       });
   };
   return (
-    <AuthContext.Provider value={{ signIn, signOut, loginWithGoogle }}>
+    <AuthContext.Provider value={{ signInWithEmail, loginWithGoogle, user }}>
       {children}
     </AuthContext.Provider>
   );

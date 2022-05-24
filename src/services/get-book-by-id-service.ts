@@ -4,9 +4,13 @@ import { BookType } from "../types/book-type";
 
 type GetBookByIdServiceType = {
   bookId: string;
+  uid?: string;
 };
-const GetBookByIdService = async ({ bookId }: GetBookByIdServiceType) => {
-  const booksCollectionRef = collection(db, "books", bookId, "details");
+const GetBookByIdService = async ({ bookId, uid }: GetBookByIdServiceType) => {
+  const booksCollectionRef = collection(
+    db,
+    `users/${uid}/books/${bookId}/details`
+  );
   try {
     const snapshot = await getDocs(booksCollectionRef);
     const book = snapshot.docs.map((doc) => ({

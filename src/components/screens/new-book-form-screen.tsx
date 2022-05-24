@@ -1,7 +1,7 @@
 import { PhotographIcon } from "@heroicons/react/solid";
-import { useRouter } from "next/router";
 import React from "react";
 import useCreateBook from "../../api-hooks/use-create-book";
+import { useAuth } from "../../hooks/use-auth";
 import useForm from "../../hooks/use-form";
 import { BookType } from "../../types/book-type";
 import Button from "../atoms/button";
@@ -14,14 +14,15 @@ export interface BookFormScreenProps {
   initialValues?: BookType;
 }
 const BookFormScreen: React.FC<BookFormScreenProps> = ({ initialValues }) => {
-  const router = useRouter();
-  const { fetch, error } = useCreateBook();
-  const { getValue, setValue, getError, submit } = useForm<BookType>({
+  const { user } = useAuth();
+  const { fetch } = useCreateBook();
+  const { getValue, setValue, submit } = useForm<BookType>({
     initialValues,
     onSubmit: (values: BookType) => {
       fetch({
         ...values!,
         book: values,
+        uid: user?.uid,
       });
     },
   });

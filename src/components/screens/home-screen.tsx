@@ -1,6 +1,7 @@
 import React from "react";
 import useGetBookById from "../../api-hooks/use-get-book-by-id";
 import useGetBooks from "../../api-hooks/use-get-books";
+import { useAuth } from "../../hooks/use-auth";
 import { BookType } from "../../types/book-type";
 import WebPage from "../atoms/webpage";
 import BookDetailModal from "../organisms/book-detail-modal";
@@ -13,13 +14,14 @@ export interface HomeScreenProps {
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const [showBookDetailModal, setShowBookDetailModal] = React.useState(false);
   const [bookId, setBookId] = React.useState("");
-  const { data: getBooks } = useGetBooks();
-
-  const { data } = useGetBookById({
-    bookId: bookId,
+  const { user } = useAuth();
+  const { data: getBooks } = useGetBooks({ uid: user?.uid });
+  const { data: bookDetail } = useGetBookById({
+    bookId,
+    uid: user?.uid,
   });
-  const bookDetail = data || [];
 
+  console.log(getBooks);
   return (
     <PrivateTemplate title="Biblioteca">
       <WebPage title="Home | Library" />
@@ -32,7 +34,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         }}
       />
       <BookDetailModal
-        booksDetail={bookDetail}
+        booksDetail={bookDetail!}
         isOpen={showBookDetailModal}
         closeModal={() => setShowBookDetailModal(false)}
       />

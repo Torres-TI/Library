@@ -23,7 +23,7 @@ const BookDetailModal: React.FC<BookDetailModalProps> = ({
       closeModal={closeModal}
       className={`w-full max-w-md transform overflow-hidden rounded-2xl bg-white  text-left align-middle shadow-xl transition-all min-w-[1200px] min-h-[640px]`}
     >
-      {booksDetail.map((book) => {
+      {booksDetail?.map((book) => {
         return (
           <>
             <div key={book.id} className="w-full h-full flex flex-row relative">

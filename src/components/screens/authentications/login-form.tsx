@@ -14,7 +14,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const { signIn, loginWithGoogle } = useAuth();
+  const { signInWithEmail, loginWithGoogle } = useAuth();
   return (
     <>
       <div className=" flex flex-col w-full space-y-4 mb-4 mt-6 md:mt-8 lg:mt-10">
@@ -75,7 +75,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         type="button"
         className=" w-full bg-blue-800  shadow-sm border hover:bg-blue-700  hover:border-blue-600 h-[2.5rem] md:h-[3rem] rounded-xl flex items-center px-6  mt-4"
         onClick={() => {
-          signIn(email, password);
+          signInWithEmail(email, password);
         }}
       >
         <text className="flex flex-1 justify-center font-semibold text-sm text-white uppercase">
