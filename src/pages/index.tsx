@@ -1,7 +1,6 @@
-export default function Home() {
-  return (
-    <text className="text-3xl font-bold underline text-green-500">
-      Hello world!
-    </text>
-  );
-}
+import LoginScreen from "./login";
+
+const HomeRoute = () => {
+  return <LoginScreen />;
+};
+export default HomeRoute;
